@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { ButtonPrimary } from './ButtonPrimary';
 import { Row } from './Row';
 import { DialogFeedback } from './DialogFeedback';
-import { List, Box, Typography } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { TableTitle, TableList } from './Table.styles';
 
 export const Table = ({ resultList, setLoad }) => {
   const { totalPeople, dietBook } = resultList;
@@ -13,7 +13,7 @@ export const Table = ({ resultList, setLoad }) => {
   };
   const [open, setOpen] = useState(false);
   const [id, setId] = useState();
-  const [starId, setstarId] = useState(2);
+  const [starId, setStarId] = useState(2);
   const [isLocal, setIsLocal] = useState(false);
   const [comment, setComment] = useState('');
   const [phoneNumb, setPhoneNumb] = useState('');
@@ -21,7 +21,7 @@ export const Table = ({ resultList, setLoad }) => {
   const getStars = (e) => {
     if (e.target.closest('svg[id]') && !isLocal) {
       const id = e.target.closest('svg[id]').id;
-      setstarId(id);
+      setStarId(id);
     }
   };
 
@@ -31,12 +31,12 @@ export const Table = ({ resultList, setLoad }) => {
     if (localStorage.getItem(`${id}`)) {
       const { stars, comment, phone } = JSON.parse(localStorage.getItem(`${id}`));
       setIsLocal(true);
-      setstarId(+stars);
+      setStarId(+stars);
       setComment(comment);
       setPhoneNumb(phone);
     } else {
       setIsLocal(false);
-      setstarId(2);
+      setStarId(2);
       setComment('');
       setPhoneNumb('');
     }
@@ -50,48 +50,24 @@ export const Table = ({ resultList, setLoad }) => {
 
   return (
     <>
-      <Typography
-        component="p"
-        variant="h6"
-        sx={{
-          fontWeight: 'bold',
-          pb: '15px',
-          color: 'grey.800',
-          textAlign: 'center',
-          textTransform: 'uppercase',
-        }}
-      >
-        Feedback list
-      </Typography>
-      <List
-        sx={{
-          width: '100%',
-          maxWidth: 360,
-          m: '20px auto',
-          p: '0 25px',
-          bgcolor: 'background.paper',
-          border: 1,
-          borderColor: 'grey.300',
-          borderRadius: 1,
-        }}
-        aria-label="contacts"
-      >
-        {totalPeople.map((item, index) => (
+      <TableTitle>Feedback list</TableTitle>
+      <TableList>
+        {totalPeople.map(({ name, eatsPizza }, index) => (
           <Row
             onClick={handleClickOpen}
-            color={isVegan(item.name) ? 'green' : 'grey.800'}
-            name={item.name}
-            disabled={item.eatsPizza ? false : true}
+            color={isVegan(name) ? 'green' : 'grey.800'}
+            name={name}
+            disabled={eatsPizza ? false : true}
             key={index}
             id={index}
-            visibility={item.eatsPizza && !localStorage.getItem(`${index}`) ? 'hidden' : false}
+            visibility={eatsPizza && !localStorage.getItem(`${index}`) ? 'hidden' : false}
           />
         ))}
-      </List>
+      </TableList>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <ButtonPrimary color="error" onClick={clearLocalStorage} icon={<DeleteIcon />}>
+        <Button color="error" variant="contained" onClick={clearLocalStorage} icon={<DeleteIcon />}>
           Clear app
-        </ButtonPrimary>
+        </Button>
       </Box>
       <DialogFeedback
         open={open}

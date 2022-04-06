@@ -7,14 +7,14 @@ import {
   Typography,
   TextField,
   Box,
+  Button,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import SendIcon from '@mui/icons-material/Send';
 import StarIcon from '@mui/icons-material/Star';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { AddInputs } from './AddInputs';
-import { ButtonPrimary } from './ButtonPrimary';
-import { Feedback } from './Feedback';
+import { AddInputs } from '../AddInputs';
+import { Feedback } from '../Feedback';
 
 export const DialogFeedback = ({
   open,
@@ -132,24 +132,26 @@ export const DialogFeedback = ({
         </Box>
 
         <DialogActions sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
-          <ButtonPrimary
+          <Button
             type="reset"
+            variant="contained"
             autoFocus
             color="error"
             icon={<CloseIcon />}
             onClick={handleClose}
           >
             Close
-          </ButtonPrimary>
-          <ButtonPrimary
+          </Button>
+          <Button
             type="submit"
             autoFocus
+            variant="contained"
             color={isLocal ? 'error' : 'success'}
             icon={isLocal ? <DeleteIcon /> : <SendIcon />}
             onClick={deleteFeddback}
           >
-            {isLocal ? 'Delite' : 'Save'}
-          </ButtonPrimary>
+            {isLocal ? 'Delete' : 'Save'}
+          </Button>
         </DialogActions>
       </form>
     </Dialog>

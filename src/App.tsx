@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
-import { Preloader, Table } from './components';
+import { Preloader } from './components';
 import { getVegansBook } from './api';
 import { TEatObj, TDietObj } from './types';
 import { getWhoEatPizza } from './functions/getWhoEatPizza';
+import { Table } from './components/Table';
 
 export const App = (): JSX.Element => {
   const [resultList, setResultList] = useState<{
-    totalPeople: never[] | TEatObj[];
-    eatPizza: never[] | TEatObj[];
-    dietBook: never[] | TDietObj[];
+    totalPeople: TEatObj[];
+    eatPizza: TEatObj[];
+    dietBook: TDietObj[];
     complete: boolean;
     pending: boolean;
     error: boolean;

@@ -2,7 +2,23 @@ import { ListItem, ListItemIcon, ListItemButton, ListItemText } from '@mui/mater
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import ClearIcon from '@mui/icons-material/Clear';
 
-export const Row = ({ color, disabled, visibility, name, onClick, id }) => {
+type TProps = {
+  color: string;
+  disabled: boolean;
+  visibility: boolean | string;
+  name: string;
+  onClick: () => void;
+  id: string;
+};
+
+export const Row: React.FC<TProps> = ({
+  color,
+  disabled,
+  visibility,
+  name,
+  onClick,
+  id,
+}): JSX.Element => {
   return (
     <>
       <ListItem disablePadding>
