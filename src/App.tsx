@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Preloader } from './components';
 import { getVegansBook } from './api';
 import { TEatObj, TDietObj } from './types';
 import { getWhoEatPizza } from './functions/getWhoEatPizza';
 import { Table } from './components/Table';
+import { PercentWidget } from './components/PercentWidget';
 
 export const App = (): JSX.Element => {
   const [resultList, setResultList] = useState<{
@@ -91,6 +92,7 @@ export const App = (): JSX.Element => {
     <div>
       {resultList.pending && <Preloader />}
       {resultList.complete && <Table resultList={resultList} setLoad={setLoad} />}
+      <PercentWidget value={35} />
     </div>
   );
 };
