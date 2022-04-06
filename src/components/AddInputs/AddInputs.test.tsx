@@ -1,15 +1,18 @@
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { AddInputs } from '.';
+import { AddInputs } from './AddInputs';
 
-describe('AddInputs', () => {
+describe('AddInputs', (): void => {
   it('render Items List', (): void => {
     const { getByRole } = render(<AddInputs />);
-    expect(getByRole('button')).toBeInTheDocument();
-    userEvent.click(getByRole('button'));
+
+    const button = getByRole('button');
+    expect(button).toBeInTheDocument();
+    userEvent.click(button);
     expect(getByRole('listitem')).toBeInTheDocument();
-    expect(getByRole('textbox', { name: 'input №1' }));
-    userEvent.type(getByRole('textbox', { name: 'input №1' }), 'Spaghetti');
-    expect(getByRole('textbox', { name: 'input №1' })).toHaveValue('Spaghetti');
+    const input = getByRole('textbox', { name: 'input №1' });
+    expect(input).toBeInTheDocument();
+    userEvent.type(input, 'Spaghetti');
+    expect(input).toHaveValue('Spaghetti');
   });
 });

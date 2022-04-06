@@ -103,7 +103,6 @@ export const Table = ({ resultList, setLoad }) => {
         isLocal={isLocal}
         comment={comment}
         phoneNumb={phoneNumb}
-        // disabled={isLocal ? true : false}
         display={isLocal ? 'none' : false}
       />
     </>

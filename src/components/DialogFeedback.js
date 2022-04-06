@@ -1,4 +1,3 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import {
   Dialog,
@@ -27,7 +26,6 @@ export const DialogFeedback = ({
   isLocal,
   comment,
   phoneNumb,
-  // disabled,
   display,
 }) => {
   const starLength = [0, 1, 2, 3, 4];
@@ -100,8 +98,6 @@ export const DialogFeedback = ({
             variant="filled"
             color="success"
             autoComplete="off"
-            // disabled={disabled}
-            // defaultValue={phoneNumb}
             {...register('phone', {
               required: true,
               minLength: 3,
@@ -123,8 +119,6 @@ export const DialogFeedback = ({
             rows={4}
             variant="filled"
             color="success"
-            // disabled={disabled}
-            // defaultValue={comment}
             {...register('comment', {
               required: true,
               minLength: 10,
